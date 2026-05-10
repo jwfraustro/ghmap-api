@@ -18,6 +18,9 @@ def ingest_content_log(payload: ContentLogRequest, db: Session = Depends(get_db)
             puerto=entry.puerto,
             file=entry.file,
             bounce_ip=entry.bounceIp,
+            player_net_id=entry.playerNetID,
+            tutorial=entry.tutorial,
+            token_trace=entry.tokenTrace,
         )
         for entry in payload.contentLog
     ]

@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel, Field
 
 
@@ -7,7 +8,10 @@ class ContentLogEntrySchema(BaseModel):
     fecha: str
     puerto: int
     file: str
-    bounceIp: str = Field(alias="bounceIp")
+    bounceIp: str
+    playerNetID: Optional[str] = None
+    tutorial: Optional[bool] = None
+    tokenTrace: Optional[str] = ""
 
     model_config = {"populate_by_name": True}
 
