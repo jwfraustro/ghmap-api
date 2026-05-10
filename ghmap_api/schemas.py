@@ -1,3 +1,4 @@
+from datetime import datetime
 from enum import IntEnum
 from typing import Optional
 
@@ -30,3 +31,28 @@ class ContentLogEntrySchema(BaseModel):
 
 class ContentLogRequest(BaseModel):
     contentLog: list[ContentLogEntrySchema]
+
+
+# --- Response schemas ---
+
+class ContentLogEntryResponse(BaseModel):
+    id: int
+    action: Optional[int]
+    ip: Optional[str]
+    fecha: Optional[str]
+    puerto: Optional[int]
+    file: Optional[str]
+    bounce_ip: Optional[str]
+    player_net_id: Optional[str]
+    tutorial: Optional[bool]
+    token_trace: Optional[str]
+
+    model_config = {"from_attributes": True}
+
+
+class SubmissionResponse(BaseModel):
+    id: int
+    submitted_at: datetime
+    entries: list[ContentLogEntryResponse]
+
+    model_config = {"from_attributes": True}
