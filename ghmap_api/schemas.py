@@ -1,0 +1,1 @@
+"""This module contains schemas the API handles for the ghmap_api module."""
