@@ -1,6 +1,8 @@
 """Configuration settings for ghmap-api"""
-from pydantic_settings import BaseSettings
+import os
 from typing import List
+
+from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
@@ -16,6 +18,7 @@ class Settings(BaseSettings):
     # Add your settings here
     DEBUG: bool = False
     LOG_LEVEL: str = "INFO"
+    DATABASE_URL: str = os.environ.get("DATABASE_URL", "sqlite:///./ghmap.db")
 
     class Config:
         env_file = ".env"

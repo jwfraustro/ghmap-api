@@ -1,17 +1,22 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Request
 from sqlalchemy.orm import Session
 
 from ghmap_api.database import get_db
-from ghmap_api.models import ContentLogEntry
+from ghmap_api.models import ContentLogEntry, Submission
 from ghmap_api.schemas import ContentLogRequest
 
 router = APIRouter()
 
 
 @router.post("/content-log", status_code=201)
-def ingest_content_log(payload: ContentLogRequest, db: Session = Depends(get_db)):
+def ingest_content_log(request: Request, payload: ContentLogRequest, db: Session = Depends(get_db)):
+    submission = Submission(client_ip=request.client.host)
+    db.add(submission)
+    db.flush()
+
     entries = [
         ContentLogEntry(
+            submission_id=submission.id,
             action=entry.action,
             ip=entry.ip,
             fecha=entry.fecha,
@@ -26,4 +31,4 @@ def ingest_content_log(payload: ContentLogRequest, db: Session = Depends(get_db)
     ]
     db.add_all(entries)
     db.commit()
-    return {"inserted": len(entries)}
+    return {"submission_id": submission.id, "inserted": len(entries)}

@@ -36,8 +36,8 @@ include = ["ghmap_api*"]
 
 [tool.black]
 line-length = 100
-target-version = ["py313"]
+target-version = ["py312"]
 
 [tool.ruff]
 line-length = 100
-target-version = "py313"
+target-version = "py312"
