@@ -15,9 +15,7 @@ dependencies = [
     "fastapi",
     "uvicorn",
     "pydantic",
-    "pydantic-settings",
-    "fastapi_restful",
-    "typing_inspect",
+    "sqlalchemy",
 ]
 
 [project.optional-dependencies]
